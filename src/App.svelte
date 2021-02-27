@@ -1,4 +1,10 @@
-<script></script>
-<style></style>
+<script>
+  import { AppBar, MaterialApp } from "svelte-materialify";
+</script>
 
-<p>Hello</p>
+<MaterialApp>
+  <AppBar><span slot="title">Bring Beer</span></AppBar>
+  <p>Hello</p>
+</MaterialApp>
+
+<style></style>
