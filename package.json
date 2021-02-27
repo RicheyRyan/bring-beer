@@ -13,6 +13,7 @@
   "dependencies": {
     "@snowpack/plugin-babel": "^2.1.6",
     "effector": "^21.8.4",
+    "firebase": "^8.2.9",
     "svelte": "^3.34.0",
     "svelte-materialify": "^0.3.5"
   }
