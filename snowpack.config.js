@@ -1,5 +1,8 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
+  alias: {
+    "@app": "./src",
+  },
   mount: {
     public: "/",
     src: "/dist",
@@ -13,7 +16,9 @@ module.exports = {
     /* Example: Bundle your final build: */
     bundle: true,
     minify: true,
+    splitting: true,
     treeshake: true,
+    target: "es2020",
   },
   packageOptions: {
     /* ... */

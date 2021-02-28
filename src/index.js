@@ -1,6 +1,9 @@
-import App from "./App.svelte";
+import Firebase from "@app/lib/Firebase";
 
-let app = new App({
+import "@app/store/index.js";
+import App from "@app/App.svelte";
+
+const app = new App({
   target: document.body,
 });
 
