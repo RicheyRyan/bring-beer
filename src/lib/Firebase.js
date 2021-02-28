@@ -17,4 +17,5 @@ export default {
     return app;
   },
   auth: firebase.auth,
+  firestore: firebase.firestore,
 };

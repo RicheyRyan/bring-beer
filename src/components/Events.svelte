@@ -1,11 +1,14 @@
 <script>
   import {
     Alert,
+    Button,
     ExpansionPanels,
     ExpansionPanel,
     Subheader
   } from "svelte-materialify";
-  let events = [{ type: "exchange" }, { type: "group" }, { type: "exchange" }];
+  import { events, pastEvents } from "@app/store/Event.js";
+  import Event from "@app/components/Event.svelte";
+  import EventHeader from "@app/components/EventHeader.svelte";
 </script>
 
 <article>
@@ -16,13 +19,25 @@
   {:else}
     <Subheader>Upcoming</Subheader>
     <ExpansionPanels accordion>
-      {#each events as event}
+      {#each $events as event}
         <ExpansionPanel>
-          <span slot="header">{event.type}</span>
-          Sample event
+          <span slot="header">
+            <EventHeader {event} />
+          </span>
+          <Event {event} />
         </ExpansionPanel>
       {/each}
     </ExpansionPanels>
     <Subheader class="mt-3">Past</Subheader>
+    <ExpansionPanels accordion>
+      {#each $pastEvents as event}
+        <ExpansionPanel>
+          <span slot="header">
+            <EventHeader {event} />
+          </span>
+          <Event {event} readOnly />
+        </ExpansionPanel>
+      {/each}
+    </ExpansionPanels>
   {/if}
 </article>

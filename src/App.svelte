@@ -8,7 +8,7 @@
 </script>
 
 <MaterialApp class="grey lighten-4">
-  <AppBar class="orange darken-2 theme--dark ">
+  <AppBar class="orange darken-2 theme--dark">
     <span slot="icon">
       <Icon path={mdiGlassMugVariant} class="ml-3" />
     </span>
