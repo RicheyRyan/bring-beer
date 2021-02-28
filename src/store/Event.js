@@ -15,19 +15,26 @@ const eventsColl = db.collection("events");
 
 export const createNewEvent = createEffect(eventsColl.doc().set);
 
-eventsColl.where("scheduled", ">", Date.now()).onSnapshot((snapshot) => {
-  const events = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-  loadEvents(events);
-});
-eventsColl.where("scheduled", "<", Date.now()).onSnapshot((snapshot) => {
-  const events = snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-  loadPastEvents(events);
-});
+eventsColl
+  .where("scheduled", ">", Date.now())
+  .orderBy("scheduled", "asc")
+  .onSnapshot((snapshot) => {
+    const events = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    loadEvents(events);
+  });
+eventsColl
+  .where("scheduled", "<", Date.now())
+  .orderBy("scheduled", "desc")
+  .limit(5)
+  .onSnapshot((snapshot) => {
+    const events = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    loadPastEvents(events);
+  });
 
 allEvents.watch(console.log);
