@@ -8,6 +8,7 @@
     min-width: 320px;
     margin: 0 auto;
     height: calc(100vh - 56px);
+    padding-top: 56px;
   }
   @media (max-width: 600px) {
     .layout {

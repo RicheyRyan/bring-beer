@@ -8,9 +8,14 @@
   export let readOnly = false;
   let show = false;
 
-  function getMatchName() {
+  function getMatchedUser() {
     const matchEmail = event.matches[$loggedInUser.email];
-    return $usersById[matchEmail].displayName || matchEmail;
+    return $usersById[matchEmail];
+  }
+
+  function getMatchName() {
+    const matchUser = getMatchedUser();
+    return matchUser.displayName || matchUser.email;
   }
 </script>
 
@@ -27,9 +32,11 @@
       <strong>{getMatchName()}</strong>
     </p>
     <p>Their address is:</p>
-    <p>{event.address1}</p>
-    <p>{event.address2}</p>
-    <p>{event.address3}</p>
+    {#if Boolean(getMatchedUser().address1)}
+      <p>{event.address1}</p>
+      <p>{event.address2}</p>
+      <p>{event.address3}</p>
+    {:else}They didn't even give one{/if}
   {:else}
     <p>The selected beers are:</p>
     <a
