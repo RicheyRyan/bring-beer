@@ -1,9 +1,17 @@
 <script>
   import { Button, Icon, Divider, Tooltip } from "svelte-materialify";
   import { mdiInformationOutline } from "@mdi/js";
+  import { deleteEvent } from "@app/store/Event.js";
+  import { loggedInUser } from "@app/store/Auth.js";
+  import { users, usersById } from "@app/store/User.js";
   export let event;
   export let readOnly = false;
   let show = false;
+
+  function getMatchName() {
+    const matchEmail = event.matches[$loggedInUser.email];
+    return $usersById[matchEmail].displayName || matchEmail;
+  }
 </script>
 
 <style>
@@ -16,7 +24,7 @@
   {#if event.type === 'exchange'}
     <p>
       Your buddy is:
-      <strong>{event.buddy}</strong>
+      <strong>{getMatchName()}</strong>
     </p>
     <p>Their address is:</p>
     <p>{event.address1}</p>
@@ -37,7 +45,13 @@
       <Button class="green white-text">Select your beers</Button>
     {/if}
     <Button class="green white-text">Edit event</Button>
-    <Button class="red white-text">Delete</Button>
+    <Button
+      class="red white-text"
+      on:click={() => {
+        deleteEvent(event);
+      }}>
+      Delete
+    </Button>
   {/if}
   <Button icon on:click={() => (show = !show)}>
     <Icon path={mdiInformationOutline} />

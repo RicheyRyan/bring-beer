@@ -18,4 +18,11 @@ export default {
   },
   auth: firebase.auth,
   firestore: firebase.firestore,
+  mapDocuments: (action) => (snapshot) => {
+    const events = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    action(events);
+  },
 };

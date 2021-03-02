@@ -7,8 +7,14 @@
   import Layout from "@app/components/Layout.svelte";
 </script>
 
+<style>
+  :global(.appbar) {
+    width: 100%;
+  }
+</style>
+
 <MaterialApp class="grey lighten-4">
-  <AppBar class="orange darken-2 theme--dark">
+  <AppBar fixed class="orange darken-2 theme--dark appbar">
     <span slot="icon">
       <Icon path={mdiGlassMugVariant} class="ml-3" />
     </span>
