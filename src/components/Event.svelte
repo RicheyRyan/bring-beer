@@ -12,11 +12,7 @@
     const matchEmail = event.matches[$loggedInUser.email];
     return $usersById[matchEmail];
   }
-
-  function getMatchName() {
-    const matchUser = getMatchedUser();
-    return matchUser.displayName || matchUser.email;
-  }
+  const matchedUser = getMatchedUser();
 </script>
 
 <style>
@@ -29,13 +25,13 @@
   {#if event.type === 'exchange'}
     <p>
       Your buddy is:
-      <strong>{getMatchName()}</strong>
+      <strong>{matchedUser.displayName || matchedUser.email}</strong>
     </p>
     <p>Their address is:</p>
     {#if Boolean(getMatchedUser().address1)}
-      <p>{event.address1}</p>
-      <p>{event.address2}</p>
-      <p>{event.address3}</p>
+      <p>{matchedUser.address1}</p>
+      <p>{matchedUser.address2}</p>
+      <p>{matchedUser.address3}</p>
     {:else}They didn't even give one{/if}
   {:else}
     <p>The selected beers are:</p>

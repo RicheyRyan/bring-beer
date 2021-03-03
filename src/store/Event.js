@@ -52,4 +52,4 @@ eventsColl
   .limit(5)
   .onSnapshot(Firebase.mapDocuments(loadPastEvents));
 
-events.watch(console.log);
+// events.watch(console.log);

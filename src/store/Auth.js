@@ -2,7 +2,9 @@ import { createStore, createEvent, forward, createEffect } from "effector";
 import Firebase from "@app/lib/Firebase";
 import { navigate } from "svelte-routing";
 
-export const loggedInUser = createStore(null);
+export const loggedInUser = createStore({});
+
+loggedInUser.watch(console.log);
 
 const loggedIn = createEvent();
 const loggedOut = createEvent();
@@ -25,3 +27,13 @@ Firebase.auth(Firebase.app()).onAuthStateChanged(function (fbUser) {
     loggedOut();
   }
 });
+Firebase.auth(Firebase.app()).onIdTokenChanged(function (fbUser) {
+  if (fbUser) {
+    loggedIn(fbUser);
+  } else {
+    loggedOut();
+  }
+});
+
+// console.log(Firebase.auth(Firebase.app().currentUser));
+// console.log("????????????????????", Firebase.auth(Firebase.app()).currentUser);

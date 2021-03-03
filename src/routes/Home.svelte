@@ -2,6 +2,7 @@
   import { Tabs, Tab, TabContent, Icon } from "svelte-materialify";
   import { mdiCalendarClock, mdiAccountCircle } from "@mdi/js";
   import Events from "@app/components/Events.svelte";
+  import UserForm from "@app/components/UserForm.svelte";
 </script>
 
 <Tabs grow class="orange-text lighten-2">
@@ -19,6 +20,8 @@
     <TabContent>
       <Events />
     </TabContent>
-    <TabContent>User</TabContent>
+    <TabContent>
+      <UserForm />
+    </TabContent>
   </section>
 </Tabs>
