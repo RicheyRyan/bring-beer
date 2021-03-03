@@ -1,17 +1,12 @@
-import { createStore, createEvent, createEffect } from "effector";
+import { createEvent, createEffect, restore } from "effector";
 import Firebase from "@app/lib/Firebase";
 import Exchange from "@app/lib/Exchange";
-import * as R from "ramda";
 import produce from "immer";
 
-export const allEvents = createStore([]);
-export const events = createStore([]);
-export const pastEvents = createStore([]);
 const loadEvents = createEvent();
 const loadPastEvents = createEvent();
-
-events.on(loadEvents, (_, events) => events);
-pastEvents.on(loadPastEvents, (_, events) => events);
+export const events = restore(loadEvents, []);
+export const pastEvents = restore(loadPastEvents, []);
 
 const db = Firebase.firestore();
 const eventsColl = db.collection("events");

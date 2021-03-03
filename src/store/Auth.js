@@ -1,13 +1,11 @@
-import { createStore, createEvent, forward, createEffect } from "effector";
+import { restore, createEvent, forward, createEffect } from "effector";
 import Firebase from "@app/lib/Firebase";
 import { navigate } from "svelte-routing";
-
-export const loggedInUser = createStore({});
 
 const loggedIn = createEvent();
 const loggedOut = createEvent();
 
-loggedInUser.on(loggedIn, (_, user) => user).reset(loggedOut);
+export const loggedInUser = restore(loggedIn, {}).reset(loggedOut);
 
 forward({
   from: loggedIn,

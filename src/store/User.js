@@ -1,15 +1,19 @@
-import { createStore, createEvent, createEffect, combine } from "effector";
+import {
+  createStore,
+  createEvent,
+  createEffect,
+  combine,
+  restore,
+} from "effector";
 import Firebase from "@app/lib/Firebase";
 import * as R from "ramda";
 import { loggedInUser } from "@app/store/Auth";
 
-export const users = createStore([]);
+const loadUsers = createEvent();
+export const users = restore(loadUsers, []);
 export const usersById = users.map((users) =>
   R.reduce((acc, value) => R.assoc(value.email, value, acc), {}, users)
 );
-const loadUsers = createEvent();
-
-users.on(loadUsers, (_, users) => users);
 
 const db = Firebase.firestore();
 const usersColl = db.collection("users");
