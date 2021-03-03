@@ -51,5 +51,3 @@ eventsColl
   .orderBy("scheduled", "desc")
   .limit(5)
   .onSnapshot(Firebase.mapDocuments(loadPastEvents));
-
-// events.watch(console.log);

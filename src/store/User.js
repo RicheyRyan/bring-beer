@@ -9,8 +9,6 @@ export const usersById = users.map((users) =>
 );
 const loadUsers = createEvent();
 
-// usersById.watch(console.log);
-
 users.on(loadUsers, (_, users) => users);
 
 const db = Firebase.firestore();
@@ -29,5 +27,3 @@ export const currentUser = combine(
     return usersById[user?.email ?? ""];
   }
 );
-
-currentUser.watch(console.log);

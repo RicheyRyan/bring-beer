@@ -4,8 +4,6 @@ import { navigate } from "svelte-routing";
 
 export const loggedInUser = createStore({});
 
-loggedInUser.watch(console.log);
-
 const loggedIn = createEvent();
 const loggedOut = createEvent();
 
@@ -34,6 +32,3 @@ Firebase.auth(Firebase.app()).onIdTokenChanged(function (fbUser) {
     loggedOut();
   }
 });
-
-// console.log(Firebase.auth(Firebase.app().currentUser));
-// console.log("????????????????????", Firebase.auth(Firebase.app()).currentUser);
