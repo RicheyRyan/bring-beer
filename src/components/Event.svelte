@@ -2,17 +2,19 @@
   import { Button, Icon, Divider, Tooltip } from "svelte-materialify";
   import { mdiInformationOutline } from "@mdi/js";
   import { deleteEvent } from "@app/store/Event.js";
-  import { loggedInUser } from "@app/store/Auth.js";
-  import { users, usersById } from "@app/store/User.js";
+  import { users, usersById, currentUser } from "@app/store/User.js";
   export let event;
   export let readOnly = false;
   let show = false;
 
   function getMatchedUser() {
-    const matchEmail = event.matches[$loggedInUser.email];
+    if (!event.matches) {
+      return null;
+    }
+    const matchEmail = event.matches[$currentUser.email];
     return $usersById[matchEmail];
   }
-  const matchedUser = getMatchedUser();
+  let matchedUser = getMatchedUser();
 </script>
 
 <style>
@@ -28,7 +30,7 @@
       <strong>{matchedUser.displayName || matchedUser.email}</strong>
     </p>
     <p>Their address is:</p>
-    {#if Boolean(getMatchedUser().address1)}
+    {#if Boolean(matchedUser.address1)}
       <p>{matchedUser.address1}</p>
       <p>{matchedUser.address2}</p>
       <p>{matchedUser.address3}</p>

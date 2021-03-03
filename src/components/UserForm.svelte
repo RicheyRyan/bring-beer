@@ -4,14 +4,8 @@
   import { currentUser, editUser } from "@app/store/User";
   import { loggedInUser } from "@app/store/Auth.js";
 
-  // let displayName = "";
-  // let address1 = "";
-  // let address2 = "";
-  // let address3 = "";
   let user = null;
   $: user = $currentUser;
-
-  // console.log(user);
 </script>
 
 <form>
