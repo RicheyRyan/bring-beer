@@ -9,4 +9,10 @@ export default {
   isRequired(v) {
     return Boolean(v) || "Required";
   },
+  isCraftCentral(v) {
+    return (
+      (v.includes("craftcentral.ie") && v.includes("variant=")) ||
+      "Not a craftcentral URL"
+    );
+  },
 };

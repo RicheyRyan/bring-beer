@@ -17,7 +17,7 @@
 </style>
 
 <Portal target="#dialog">
-  <Dialog {active} class="dialog-form">
+  <Dialog {active} class="dialog-form" fullscreen>
     <section class="pt-5 pl-5 pr-5 ">
       <slot />
     </section>

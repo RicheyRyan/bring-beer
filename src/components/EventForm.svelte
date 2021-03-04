@@ -11,7 +11,8 @@
   export let event = {
     type: "group",
     scheduled: new Date(),
-    exchangeUsers: []
+    exchangeUsers: [],
+    beers: []
   };
 </script>
 
