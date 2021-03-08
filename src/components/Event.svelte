@@ -95,7 +95,7 @@
   </Tooltip>
 </section>
 <FormDialog bind:active={selectBeersActive}>
-  {#each usersBeers as beer, i}
+  {#each usersBeers as beer, i (beer.url)}
     <TextField
       bind:value={beer.url}
       outlined
