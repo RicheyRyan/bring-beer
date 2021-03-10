@@ -13,6 +13,7 @@
   import Validator from "@app/lib/Validator.js";
   import CraftCentral from "@app/lib/CraftCentral.js";
   import FormDialog from "@app/components/FormDialog.svelte";
+  import EventForm from "@app/components/EventForm.svelte";
   export let event;
   export let readOnly = false;
   let show = false;
@@ -31,6 +32,7 @@
   let matchedUser = getMatchedUser();
   let usersBeers = getUsersBeers();
   let selectBeersActive = false;
+  let editFormActive = false;
   let cartUrl = CraftCentral.generateCartUrl(event.beers);
 </script>
 
@@ -73,7 +75,13 @@
         Select your beers
       </Button>
     {/if}
-    <Button class="green white-text">Edit event</Button>
+    <Button
+      class="green white-text"
+      on:click={() => {
+        editFormActive = true;
+      }}>
+      Edit event
+    </Button>
     <Button
       class="red white-text"
       on:click={() => {
@@ -128,4 +136,13 @@
     class="green white-text">
     Save beers
   </Button>
+</FormDialog>
+<FormDialog bind:active={editFormActive}>
+  <EventForm
+    on:submitForm={e => {
+      editFormActive = false;
+      editEvent(e.detail);
+    }}
+    bind:event
+    edit />
 </FormDialog>

@@ -9,7 +9,7 @@
     NavigationDrawer
   } from "svelte-materialify";
   import { mdiPlus } from "@mdi/js";
-  import { events, pastEvents } from "@app/store/Event.js";
+  import { events, pastEvents, createNewEvent } from "@app/store/Event.js";
   import Event from "@app/components/Event.svelte";
   import EventHeader from "@app/components/EventHeader.svelte";
   import EventForm from "@app/components/EventForm.svelte";
@@ -65,5 +65,9 @@
   <Icon path={mdiPlus} />
 </Button>
 <FormDialog bind:active>
-  <EventForm on:submitForm={() => (active = false)} />
+  <EventForm
+    on:submitForm={e => {
+      active = false;
+      createNewEvent(e.detail);
+    }} />
 </FormDialog>

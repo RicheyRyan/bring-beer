@@ -3,7 +3,6 @@
   import { createEventDispatcher } from "svelte";
   import { Button, Checkbox, Radio, TextField } from "svelte-materialify";
   import { users } from "@app/store/User.js";
-  import { createNewEvent } from "@app/store/Event.js";
   import Validator from "@app/lib/Validator.js";
 
   const dispatch = createEventDispatcher();
@@ -25,6 +24,7 @@
     bind:value={event.scheduled}>
     Date
   </TextField>
+
   <p>Event type:</p>
   <section class="mb-5">
     <Radio bind:group={event.type} value="group" id="event-type-group">
@@ -56,9 +56,8 @@
     block
     on:click={() => {
       dispatch('submitForm', event);
-      createNewEvent(event);
     }}
     class="green white-text">
-    Create Event
+    Save
   </Button>
 </form>

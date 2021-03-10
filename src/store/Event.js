@@ -26,11 +26,9 @@ export const editEvent = createEffect((event) => {
   eventsColl.doc(event.id).set(
     produce(event, (draft) => {
       draft.scheduled = new Date(event.scheduled).getTime();
-      if (draft.type === "exchange") {
-        draft.matches = Exchange.matches(event.exchangeUsers);
-      }
     })
   );
+  document.location.reload();
 });
 
 export const deleteEvent = createEffect((event) => {
