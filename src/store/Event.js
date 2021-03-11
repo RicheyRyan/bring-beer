@@ -1,4 +1,4 @@
-import { createEvent, createEffect, restore } from "effector";
+import { createStore, createEvent, createEffect, restore } from "effector";
 import Firebase from "@app/lib/Firebase";
 import Exchange from "@app/lib/Exchange";
 import produce from "immer";
@@ -28,7 +28,6 @@ export const editEvent = createEffect((event) => {
       draft.scheduled = new Date(event.scheduled).getTime();
     })
   );
-  document.location.reload();
 });
 
 export const deleteEvent = createEffect((event) => {

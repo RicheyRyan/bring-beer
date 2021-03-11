@@ -1,6 +1,7 @@
 <script>
   export let event;
-  const date = new Intl.DateTimeFormat("en-IE", {
+  let date;
+  $: date = new Intl.DateTimeFormat("en-IE", {
     dateStyle: "full",
     timeStyle: "short"
   }).format(new Date(event.scheduled));
