@@ -34,7 +34,8 @@
   let usersBeers = getUsersBeers();
   let selectBeersActive = false;
   let editFormActive = false;
-  let cartUrl = CraftCentral.generateCartUrl(event.beers);
+  let cartUrl;
+  $: cartUrl = CraftCentral.generateCartUrl(event.beers);
   let beerTotalPrice;
   $: beerTotalPrice = R.reduce(
     (total, { price }) => total + price,
