@@ -1,6 +1,7 @@
 <script>
   import * as R from "ramda";
   import {
+    Alert,
     Button,
     Icon,
     Divider,
@@ -9,7 +10,7 @@
   } from "svelte-materialify";
   import { mdiInformationOutline, mdiDelete } from "@mdi/js";
   import { deleteEvent, editEvent } from "@app/store/Event.js";
-  import { users, usersById, currentUser } from "@app/store/User.js";
+  import { usersById, currentUser } from "@app/store/User.js";
   import Validator from "@app/lib/Validator.js";
   import CraftCentral from "@app/lib/CraftCentral.js";
   import FormDialog from "@app/components/FormDialog.svelte";
@@ -34,6 +35,12 @@
   let selectBeersActive = false;
   let editFormActive = false;
   let cartUrl = CraftCentral.generateCartUrl(event.beers);
+  let beerTotalPrice;
+  $: beerTotalPrice = R.reduce(
+    (total, { price }) => total + price,
+    0,
+    event.beers
+  );
 </script>
 
 <style>
@@ -57,10 +64,23 @@
   {:else}
     <p>The selected beers are:</p>
     {#each event.beers as beer}
-      <p>{beer.url}</p>
+      {#if beer.title}
+        <p>
+          <a href={beer.url}>{beer.title}</a>
+        </p>
+        <p>{beer.description}</p>
+        <p>Added by: {$usersById[beer.user].displayName}</p>
+      {:else}
+        <p>{beer.url}</p>
+      {/if}
     {:else}
       <p>No one has selected anything yet</p>
     {/each}
+    {#if beerTotalPrice < 2500}
+      <Alert class="orange-text" border="left" coloredBorder>
+        Total cost of beers doesn't meet the minimum shipping limit of 25 euro.
+      </Alert>
+    {/if}
     <div>
       <a href={cartUrl} target="_blank">Checkout now</a>
     </div>
