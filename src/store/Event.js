@@ -1,4 +1,4 @@
-import { createStore, createEvent, createEffect, restore } from "effector";
+import { createEvent, createEffect, restore } from "effector";
 import Firebase from "@app/lib/Firebase";
 import Exchange from "@app/lib/Exchange";
 import produce from "immer";
